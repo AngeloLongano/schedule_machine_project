@@ -1,47 +1,25 @@
-import pandas as pd
 from utils.data_types import *
 from utils.data_helper import *
+from utils.constraints import *
+from utils.entities_choice import *
 
-machine: list[Machine] = get_data_from_excel("machines")
-products: list[Product] = get_data_from_excel("products")
+machines: list[Machine] = get_data_from_excel("machines")
 work_types: list[WorkType] = get_data_from_excel("work types")
-supplier_order: list[SupplierOrder] = get_data_from_excel("supplier order")
-customer_order: list[CustomerOrder] = get_data_from_excel("customer order")
-products_desired: list[ProductDesired] = get_data_from_excel("products desired")
+supplier_orders: list[SupplierOrder] = get_data_from_excel("supplier order")
+customer_deadlines: list[CustomerDeadline] = get_data_from_excel("customer order")
 
-inventory = Inventory(
-    products=products,
-    products_desired=products_desired,
-    days=DAYS,
-    customer_orders=customer_order,
-    supplier_orders=supplier_order,
+solution = Solution(
+    machines,
+    work_types,
+    supplier_orders,
+    customer_deadlines,
 )
 
-# inventory_day0: list[InventoryRow] = [
-#     InventoryRow(
-#         id_product=f"R{p['id_product']}",
-#         start_quantity=p["start_quantity"],
-#         day=0,
-#     )
-#     for i, p in enumerate(products_desired)
-# ] + [
-#     InventoryRow(
-#         id_product=f"F{p['id_product']}",
-#         start_quantity=0,
-#         day=0,
-#     )
-#     for i, p in enumerate(products_desired)
-# ]
+solution.constructive_solution()
 
-# inventory: list[list[InventoryRow]] = [inventory_day0] + [
-#     [
-#         InventoryRow(id_product=r.id_product, start_quantity=0, day=d)
-#         for i, r in enumerate(inventory_day0)
-#     ]
-#     for d in range(1, DAYS)
-# ]
+print(solution)
 
-write_data_to_file_excel(inventory, "inventory.xlsx", "day")
+# write_data_to_file_excel(inventory, "inventory.xlsx", "day")
 
 print("ciao")
 # TODO: generate tasks

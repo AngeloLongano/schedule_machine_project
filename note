@@ -1,4 +1,13 @@
 Rimossi i tools
 Rinominato le costanti
+Il magazzino considera i prodotti già presenti
+Le scadenze sono tutte a fine periodo
 
 Bisogna rilassare il problema, rimuovere dei vincoli
+
+
+TODO:
+Sistemare grafico
+valutazione soluzione
+Creare qualche altro modo per creare il job
+Refactoring report
