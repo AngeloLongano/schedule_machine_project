@@ -1,11 +1,14 @@
+import pandas as pd
 from utils.data_types import *
 from utils.data_helper import *
-from utils.algorithms import *
+from utils.plot_helper import draw_gantt_chart
 
 machines: list[Machine] = get_data_from_excel("machines")
 work_types: list[WorkType] = get_data_from_excel("work types")
 supplier_orders: list[SupplierOrder] = get_data_from_excel("supplier order")
 customer_deadlines: list[CustomerDeadline] = get_data_from_excel("customer order")
+
+from utils.algorithms import *
 
 solution = Solution(
     machines,
@@ -16,9 +19,4 @@ solution = Solution(
 
 solution.constructive_solution()
 
-print(solution)
-
-# write_data_to_file_excel(inventory, "inventory.xlsx", "day")
-
-print("ciao")
-# TODO: generate tasks
+draw_gantt_chart(solution.schedule, work_types)

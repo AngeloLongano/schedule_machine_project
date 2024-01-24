@@ -1,5 +1,4 @@
 from utils.data_types import *
-from utils.constraints import *
 
 
 class Job:
@@ -15,14 +14,14 @@ class Job:
             + TIME_OPERATOR_FOR_EACH_WORK
         )
 
-    def max_quantity(self, remaining_time: int) -> int:
+    def max_possible_quantity(self, remaining_time: int) -> int:
         # TODO: not considered time_machine_setup
         return remaining_time // self.time_per_unit()
 
     def confirmed_job(self, worked_quantity: int):
         self.worked_quantity = worked_quantity
 
-    def time_machine_needed(self) -> int:
+    def time_needed(self) -> int:
         # TODO: not considered time_machine_setup
         return self.time_per_unit() * self.worked_quantity
 
@@ -42,13 +41,13 @@ class ScheduleMachine:
         self.list_jobs.remove(job)
 
     def calculate_time(self):
-        return sum([j.time_machine_needed() for j in self.list_jobs])
-
-    def calculate_cost(self):
-        return sum([COST_MACHINE_SETUP for _ in self.jobs])
+        return sum([j.time_needed() for j in self.list_jobs])
 
     def remaining_time(self):
         return DAILY_WORKING_MINUTES * DAYS - self.calculate_time()
+
+    def calculate_cost(self):
+        return sum([COST_MACHINE_SETUP for _ in self.jobs])
 
 
 class Inventory:
@@ -122,7 +121,7 @@ def create_job(works_to_do: list[WorkToDo], schedule: list[ScheduleMachine]) -> 
     job = Job(works_chooses)
     max_production = min(
         (
-            job.max_quantity(schedule_machine.remaining_time()),
+            job.max_possible_quantity(schedule_machine.remaining_time()),
             min([w["quantity_to_work"] for w in works_chooses]),
         )
     )
@@ -154,3 +153,7 @@ class Solution:
             job = create_job(works_to_do, self.schedule)
             self.inventory.add_job(job)
             works_to_do = self.inventory.check_inventory()
+
+    def evaluate(self):
+        # cost_configuration =sum([for ])
+        pass
