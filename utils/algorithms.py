@@ -26,7 +26,7 @@ class Job:
         return self.time_per_unit() * self.worked_quantity
 
 
-class ScheduleMachine:
+class Schedule:
     def __init__(self, machine: Machine):
         self.machine: Machine = machine
         self.list_jobs = []
@@ -46,22 +46,15 @@ class ScheduleMachine:
     def remaining_time(self):
         return DAILY_WORKING_MINUTES * DAYS - self.calculate_time()
 
-    def calculate_cost(self):
-        return sum([COST_MACHINE_SETUP for _ in self.jobs])
-
 
 class Inventory:
     def __init__(
-        self,
-        work_types: list[WorkType],
-        customer_deadlines: list[CustomerDeadline],
-        supplier_orders: list[SupplierOrder],
+        self, work_types: list[WorkType], customer_deadlines: list[CustomerDeadline]
     ):
-        self.inventory_rows: list[WorkedQuantity] = list(
+        self.list_worked_quantities: list[WorkedQuantity] = list(
             map(lambda w: {**w, "worked_quantity": 0}, work_types)
         )
         self.customer_deadlines = customer_deadlines
-        self.supplier_orders = supplier_orders
 
     def check_inventory(self) -> list[WorkToDo]:
         works_to_do: list[WorkToDo] = []
@@ -70,7 +63,7 @@ class Inventory:
             find_inventory_row = next(
                 (
                     i
-                    for i in self.inventory_rows
+                    for i in self.list_worked_quantities
                     if i["id"] == customer_deadline["id_work_type"]
                 ),
                 None,
@@ -87,7 +80,7 @@ class Inventory:
         works_to_do = [
             {**work_to_do, "time_machine_needed": work["time_machine_needed"]}
             for work_to_do in works_to_do
-            for work in self.inventory_rows
+            for work in self.list_worked_quantities
             if work["id"] == work_to_do["id"]
         ]
         return works_to_do
@@ -95,7 +88,7 @@ class Inventory:
     def add_job(self, job: Job):
         for w in job.list_works:
             find_inventory_row = next(
-                (i for i in self.inventory_rows if i["id"] == w["id"]),
+                (i for i in self.list_worked_quantities if i["id"] == w["id"]),
                 None,
             )
             find_inventory_row["worked_quantity"] += job.worked_quantity
@@ -103,29 +96,84 @@ class Inventory:
     def remove_job(self, job: Job):
         for w in job.list_works:
             find_inventory_row = next(
-                (i for i in self.inventory_rows if i["id_work_type"] == w["id"]),
+                (
+                    i
+                    for i in self.list_worked_quantities
+                    if i["id_work_type"] == w["id"]
+                ),
                 None,
             )
             find_inventory_row["worked_quantity"] -= job.worked_quantity
 
 
 # chooser jobs
-def create_job(works_to_do: list[WorkToDo], schedule: list[ScheduleMachine]) -> Job:
+def create_job_to_finish_different_works(
+    works_to_do: list[WorkToDo], schedule: list[Schedule]
+) -> Job:
+    # Choose machine
     schedule_machine = max(
         schedule, key=lambda x: (x.remaining_time(), x.get_pallets())
     )
-    # TODO: clean works list
+
+    # Choose works
     works_to_do.sort(key=lambda x: x["quantity_to_work"], reverse=True)
     works_chooses = works_to_do[: schedule_machine.get_pallets()]
 
-    job = Job(works_chooses)
+    clean_list_works: list[WorkType] = [
+        {"id": w["id"], "time_machine_needed": w["time_machine_needed"]}
+        for w in works_chooses
+    ]
+    # Simulate job
+    job = Job(clean_list_works)
     max_production = min(
         (
             job.max_possible_quantity(schedule_machine.remaining_time()),
             min([w["quantity_to_work"] for w in works_chooses]),
         )
     )
+    if max_production == 0:
+        return None
 
+    # Confirm job and machine
+    job.confirmed_job(max_production)
+    schedule_machine.add_job(job)
+
+    return job
+
+
+def create_job_to_finish_work(
+    works_to_do: list[WorkToDo], schedule: list[Schedule]
+) -> Job:
+    # Choose works
+    work_choose = max(works_to_do, key=lambda x: x["quantity_to_work"])
+
+    # Choose machine
+    schedule_machine = max(
+        schedule,
+        key=lambda x: (
+            x.remaining_time(),
+            x.get_pallets(),
+        ),
+    )
+    clean_list_work: list[WorkType] = [
+        {
+            "id": work_choose["id"],
+            "time_machine_needed": work_choose["time_machine_needed"],
+        }
+        for _ in range(schedule_machine.get_pallets())
+    ]
+    # Simulate job
+    job = Job(clean_list_work)
+    max_production = min(
+        (
+            job.max_possible_quantity(schedule_machine.remaining_time()),
+            work_choose["quantity_to_work"] // schedule_machine.get_pallets(),
+        )
+    )
+    if max_production == 0:
+        return None
+
+    # Confirm job and machine
     job.confirmed_job(max_production)
     schedule_machine.add_job(job)
 
@@ -138,22 +186,25 @@ class Solution:
         machines: list[Machine],
         work_types: list[WorkType],
         customer_deadlines: list[CustomerDeadline],
-        supplier_orders: list[SupplierOrder],
     ):
-        self.schedule: list[ScheduleMachine] = list(
-            map(lambda m: ScheduleMachine(m), machines)
-        )
-        self.inventory = Inventory(work_types, customer_deadlines, supplier_orders)
+        self.schedule: list[Schedule] = list(map(lambda m: Schedule(m), machines))
+        self.inventory = Inventory(work_types, customer_deadlines)
+        self.status = "not evaluated"
 
-    def constructive_solution(self):
+    def constructive_solution(self, create_job_function: callable):
         works_to_do = self.inventory.check_inventory()
         while len(works_to_do) > 0:
-            print(f"works to do: {len(works_to_do)}")
-            print(f" works to do: {works_to_do}")
-            job = create_job(works_to_do, self.schedule)
+            job = create_job_function(works_to_do, self.schedule)
+            if job is None:
+                self.status = "not constructable"
+                break
             self.inventory.add_job(job)
             works_to_do = self.inventory.check_inventory()
 
+        self.status = "constructed"
+
+    def jobs_used(self):
+        return sum([len(s.list_jobs) for s in self.schedule])
+
     def evaluate(self):
-        # cost_configuration =sum([for ])
         pass

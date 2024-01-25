@@ -4,13 +4,11 @@ from utils.algorithms import *
 
 machines: list[Machine] = get_data_from_excel("machines")
 work_types: list[WorkType] = get_data_from_excel("work types")
-supplier_orders: list[SupplierOrder] = get_data_from_excel("supplier order")
-customer_deadlines: list[CustomerDeadline] = get_data_from_excel("customer order")
+customer_deadlines: list[CustomerDeadline] = get_data_from_excel("customer deadlines")
 
 solution = Solution(
     machines,
     work_types,
-    supplier_orders,
     customer_deadlines,
 )
 

@@ -3,7 +3,7 @@ from typing import TypedDict
 # CONSTANTS
 TIME_MACHINE_SETUP = 100
 TIME_OPERATOR_FOR_EACH_WORK = 50
-MAX_TIME_MACHINE = 50
+MAX_TIME_MACHINE_FOR_EACH_WORK = 50
 
 COST_MACHINE_SETUP = 100
 _DAILY_WORKING_HOURS = 10
@@ -22,11 +22,6 @@ class Machine(TypedDict):
 class WorkType(TypedDict):
     id: str
     time_machine_needed: int
-
-
-class SupplierOrder(TypedDict):
-    id_work_type: str
-    quantity: int
 
 
 class CustomerDeadline(TypedDict):

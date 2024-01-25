@@ -13,11 +13,11 @@ def list_random_with_fixed_sum(fixed_sum, num_values, step_value=5):
     sum_random_numbers = sum(random_numbers)
 
     normalized_numbers = [
-        int((fixed_sum * num) / sum_random_numbers) for num in random_numbers
+        int((fixed_sum * n) / sum_random_numbers) for n in random_numbers
     ]
 
     normalized_numbers = [
-        round(n / step_value) * step_value for num in normalized_numbers
+        round(n / step_value) * step_value for n in normalized_numbers
     ]
 
     sum_random_numbers = sum(normalized_numbers)
@@ -39,13 +39,14 @@ def calculate_max_possible_products():
     for m in machines:
         if m["pallets"] == 1:
             max_products += int(
-                DAILY_WORKING_MINUTES / (MAX_TIME_MACHINE + TIME_OPERATOR_FOR_EACH_WORK)
+                DAILY_WORKING_MINUTES
+                / (MAX_TIME_MACHINE_FOR_EACH_WORK + TIME_OPERATOR_FOR_EACH_WORK)
             )
         else:
             max_products += (
                 int(
                     (DAILY_WORKING_MINUTES - TIME_OPERATOR_FOR_EACH_WORK)
-                    // (MAX_TIME_MACHINE * m["pallets"])
+                    // (MAX_TIME_MACHINE_FOR_EACH_WORK * m["pallets"])
                 )
                 * m["pallets"]
             )
@@ -65,7 +66,7 @@ machines: list[Machine] = [
 work_types: list[WorkType] = [
     {
         "id": f"W{i}",
-        "time_machine_needed": random.randrange(10, MAX_TIME_MACHINE, 10),
+        "time_machine_needed": random.randrange(10, MAX_TIME_MACHINE_FOR_EACH_WORK, 10),
     }
     for i in range(0, NUMBER_OF_PRODUCTS)
 ]
@@ -73,16 +74,7 @@ work_types: list[WorkType] = [
 max_products = calculate_max_possible_products()
 list_desired_quantity = list_random_with_fixed_sum(max_products, NUMBER_OF_PRODUCTS)
 
-
-supplier_order: list[SupplierOrder] = [
-    {
-        "id_work_type": w["id"],
-        "quantity": list_desired_quantity[i],
-    }
-    for i, w in enumerate(work_types)
-]
-
-customer_order: list[CustomerDeadline] = [
+customer_deadlines: list[CustomerDeadline] = [
     {
         "id_work_type": w["id"],
         "quantity": list_desired_quantity[i],
@@ -93,6 +85,6 @@ customer_order: list[CustomerDeadline] = [
 
 # WRITE DATA TO EXCEL
 write_data_to_excel(
-    [machines, work_types, supplier_order, customer_order],
-    ["machines", "work types", "supplier order", "customer order"],
+    [machines, work_types, customer_deadlines],
+    ["machines", "work types", "customer deadlines"],
 )

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.12.4)  18 JAN 2024 11:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.12.4)  25 JAN 2024 18:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -566,125 +566,110 @@ Package biblatex Info: Reference segment=0 on input line 27.
  (./cover.tex [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./article.tex
-<media/fasi_di_produzione.drawio.png, id=30, 703.62875pt x 322.20375pt>
-File: media/fasi_di_produzione.drawio.png Graphic file (type png)
-<use media/fasi_di_produzione.drawio.png>
-Package pdftex.def Info: media/fasi_di_produzione.drawio.png  used on input line 17.
-(pdftex.def)             Requested size: 390.0pt x 178.58429pt.
-<media/pipeline.drawio.png, id=33, 2144.01pt x 487.8225pt>
-File: media/pipeline.drawio.png Graphic file (type png)
-<use media/pipeline.drawio.png>
-Package pdftex.def Info: media/pipeline.drawio.png  used on input line 32.
-(pdftex.def)             Requested size: 390.0pt x 88.7347pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 21--35
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
 
  []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.35 \end{figure}
-                  [1 <./media/fasi_di_produzione.drawio.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 36--40
+l.19     \item P
+                ulizia macchina (tempo constante). [1]
+<media/fasi_di_produzione.drawio.png, id=38, 703.62875pt x 322.20375pt>
+File: media/fasi_di_produzione.drawio.png Graphic file (type png)
+<use media/fasi_di_produzione.drawio.png>
+Package pdftex.def Info: media/fasi_di_produzione.drawio.png  used on input line 23.
+(pdftex.def)             Requested size: 390.0pt x 178.58429pt.
+<media/pipeline.drawio.png, id=41, 2144.01pt x 487.8225pt>
+File: media/pipeline.drawio.png Graphic file (type png)
+<use media/pipeline.drawio.png>
+Package pdftex.def Info: media/pipeline.drawio.png  used on input line 34.
+(pdftex.def)             Requested size: 390.0pt x 88.7347pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--37
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--40
-
- []
-
-[2 <./media/pipeline.drawio.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 46--60
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--60
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--60
-
- []
-
-[3]
-<media/analisi_ciclo.drawio.png, id=59, 831.105pt x 482.80376pt>
+[2 <./media/fasi_di_produzione.drawio.png>]
+<media/analisi_ciclo.drawio.png, id=51, 831.105pt x 482.80376pt>
 File: media/analisi_ciclo.drawio.png Graphic file (type png)
 <use media/analisi_ciclo.drawio.png>
-Package pdftex.def Info: media/analisi_ciclo.drawio.png  used on input line 67.
+Package pdftex.def Info: media/analisi_ciclo.drawio.png  used on input line 45.
 (pdftex.def)             Requested size: 390.0pt x 226.55681pt.
- [4 <./media/analisi_ciclo.drawio.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 77--80
+ [3 <./media/pipeline.drawio.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 55--62
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--80
+Underfull \hbox (badness 10000) in paragraph at lines 55--62
+
+ []
+
+[4 <./media/analisi_ciclo.drawio.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 68--70
 
  []
 
 
-Overfull \hbox (26.77055pt too wide) detected at line 82
-[][]\OML/cmm/m/it/12 TotalTime \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 time[]conf \OT1/cmr/m/n/12 + [] \OML/cmm/m/it/12 N
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--87
+Underfull \hbox (badness 10000) in paragraph at lines 81--90
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 102--112
+Underfull \hbox (badness 10000) in paragraph at lines 81--90
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 102--112
-
- []
-
-[5] [6] [7] [8]
-Overfull \hbox (9.06682pt too wide) detected at line 195
-[][]\OML/cmm/m/it/12 generated[]quantity[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 quantity if fp \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 list[]works; fp \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 FinalProducts
+Overfull \hbox (37.24223pt too wide) in paragraph at lines 81--90
+\OT1/cmr/m/n/12 va-ria-bi-le in ba-se al-la $\OML/cmm/m/it/12 listWorks$ \OT1/cmr/m/n/12 scel-ta e la quan-tit^^Ra da rag-giun-ge-re $\OML/cmm/m/it/12 WorkedQuantity$\OT1/cmr/m/n/12 . 
  []
 
 
-Overfull \hbox (13.03824pt too wide) detected at line 232
-[][]\OML/cmm/m/it/12 start[]quantity[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 current[]quantity[] \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 F[]quantity[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 C[]quantity[] \OMS/cmsy/m/n/12 8 \OML/cmm/m/it/12 p \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 P
- []
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 232--235
+Underfull \hbox (badness 10000) in paragraph at lines 81--90
 
  []
 
-) [10]
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 100--106
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--106
+
+ []
+
+
+Overfull \hbox (5.23071pt too wide) in paragraph at lines 100--106
+\OT1/cmr/m/n/12 che al ter-mi-ne del pe-rio-do con-si-de-ra-to de-si-de-ra-no una cer-ta $\OML/cmm/m/it/12 DesiredQuantity[]$
+ []
+
+) [6]
 
 LaTeX Warning: Empty bibliography on input line 38.
 
 (./schedulazione_lavori_su_macchine_industriali.aux)
 Package rerunfilecheck Info: File `schedulazione_lavori_su_macchine_industriali.out' has not changed.
-(rerunfilecheck)             Checksum: 5EB67A89FEDCE5D32A65B5C6D0B8383F;643.
+(rerunfilecheck)             Checksum: B0112A2E964D7F25D14B9552FC19DC09;697.
 Package logreq Info: Writing requests to 'schedulazione_lavori_su_macchine_industriali.run.xml'.
 \openout1 = `schedulazione_lavori_su_macchine_industriali.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 17884 strings out of 478287
- 313542 string characters out of 5849289
- 1032246 words of memory out of 5000000
- 35834 multiletter control sequences out of 15000+600000
- 476487 words of font info for 53 fonts, out of 8000000 for 9000
+ 17843 strings out of 478287
+ 312970 string characters out of 5849289
+ 1029690 words of memory out of 5000000
+ 35818 multiletter control sequences out of 15000+600000
+ 475696 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,8n,68p,837b,1342s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on schedulazione_lavori_su_macchine_industriali.pdf (11 pages, 242416 bytes).
+ 60i,11n,68p,837b,1342s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on schedulazione_lavori_su_macchine_industriali.pdf (7 pages, 166879 bytes).
 PDF statistics:
- 220 PDF objects out of 1000 (max. 8388607)
- 171 compressed objects within 2 object streams
- 55 named destinations out of 1000 (max. 500000)
+ 131 PDF objects out of 1000 (max. 8388607)
+ 99 compressed objects within 1 object stream
+ 31 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 

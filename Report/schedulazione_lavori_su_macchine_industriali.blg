@@ -1,9 +1,9 @@
 [0] Config.pm:307> INFO - This is Biber 2.17
 [0] Config.pm:310> INFO - Logfile is 'schedulazione_lavori_su_macchine_industriali.blg'
-[54] biber:340> INFO - === Wed Jan 17, 2024, 12:07:36
-[65] Biber.pm:418> INFO - Reading 'schedulazione_lavori_su_macchine_industriali.bcf'
-[110] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[120] bbl.pm:654> INFO - Writing 'schedulazione_lavori_su_macchine_industriali.bbl' with encoding 'UTF-8'
-[120] bbl.pm:757> INFO - Output to schedulazione_lavori_su_macchine_industriali.bbl
-[120] Biber.pm:130> WARN - The file 'schedulazione_lavori_su_macchine_industriali.bcf' does not contain any citations!
-[120] Biber.pm:132> INFO - WARNINGS: 1
+[124] biber:340> INFO - === Thu Jan 25, 2024, 16:34:50
+[153] Biber.pm:418> INFO - Reading 'schedulazione_lavori_su_macchine_industriali.bcf'
+[238] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[261] bbl.pm:654> INFO - Writing 'schedulazione_lavori_su_macchine_industriali.bbl' with encoding 'UTF-8'
+[261] bbl.pm:757> INFO - Output to schedulazione_lavori_su_macchine_industriali.bbl
+[261] Biber.pm:130> WARN - The file 'schedulazione_lavori_su_macchine_industriali.bcf' does not contain any citations!
+[263] Biber.pm:132> INFO - WARNINGS: 1

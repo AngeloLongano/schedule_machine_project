@@ -7,16 +7,21 @@ from utils.algorithms import *
 
 
 def draw_gantt_chart(
-    schedule: list[ScheduleMachine],
+    solution: Solution,
     name: str = "Schedule",
-    is_label_work_type: bool = True,
+    is_label_work_type: bool = False,
     is_label_time: bool = False,
     is_label_days: bool = False,
     is_label_quantity: bool = False,
+    is_label_job: bool = False,
+    is_color_by_jobs: bool = False,
     is_grid_axis_x: bool = False,
     step_days: int = 2,
 ):
+    schedule: list[Schedule] = solution.schedule
     work_types: list[WorkType] = get_data_from_excel("work types")
+    num_jobs = solution.jobs_used()
+
     total_pallets = sum(
         [schedule_machine.machine["pallets"] for schedule_machine in schedule]
     )
@@ -60,7 +65,7 @@ def draw_gantt_chart(
     ax.set_title(name)
 
     index_slot = 0
-
+    count_job = 0
     for i_schedule, schedule_machine in enumerate(schedule):
         for i_pallet in range(schedule_machine.machine["pallets"]):
             for i_job, job in enumerate(schedule_machine.list_jobs):
@@ -75,7 +80,9 @@ def draw_gantt_chart(
                         ],
                         (bars_step[index_slot], height_bar),
                         facecolor=(
-                            next(
+                            list(mcolors.TABLEAU_COLORS)[i_schedule + i_job]
+                            if is_color_by_jobs
+                            else next(
                                 color["color"]
                                 for color in generate_colors
                                 if color["id"] == job.list_works[i_pallet]["id"]
@@ -86,6 +93,11 @@ def draw_gantt_chart(
                     if is_label_work_type:
                         ax.annotate(
                             job.list_works[i_pallet]["id"],
+                            (start_time, labels_pallets_step[index_slot]),
+                        )
+                    if is_label_job:
+                        ax.annotate(
+                            f"J{i_job}",
                             (start_time, labels_pallets_step[index_slot]),
                         )
                     if is_label_time:
