@@ -95,21 +95,21 @@ class Inventory:
             )
             find_inventory_row["worked_quantity"] += job.worked_quantity
 
-    def remove_job(self, job: Job):
-        for w in job.list_works:
-            find_inventory_row = next(
-                (
-                    i
-                    for i in self.list_worked_quantities
-                    if i["id_work_type"] == w["id"]
-                ),
-                None,
-            )
-            find_inventory_row["worked_quantity"] -= job.worked_quantity
+    # def remove_job(self, job: Job):
+    #     for w in job.list_works:
+    #         find_inventory_row = next(
+    #             (
+    #                 i
+    #                 for i in self.list_worked_quantities
+    #                 if i["id_work_type"] == w["id"]
+    #             ),
+    #             None,
+    #         )
+    #         find_inventory_row["worked_quantity"] -= job.worked_quantity
 
 
 # chooser jobs
-def create_job_to_finish_different_works(
+def create_job_with_different_works_in_parallel(
     works_to_do: list[WorkToDo], schedule: list[Schedule]
 ) -> Job:
     # Choose machine
@@ -143,7 +143,7 @@ def create_job_to_finish_different_works(
     return job
 
 
-def create_job_to_finish_work(
+def create_job_with_same_work_in_parallel(
     works_to_do: list[WorkToDo], schedule: list[Schedule]
 ) -> Job:
     # Choose works
@@ -232,7 +232,7 @@ def swap_move(solution: "Solution") -> "Solution":
 
 def local_search(
     start_solution,
-    create_job_function: callable = create_job_to_finish_different_works,
+    create_job_function: callable = create_job_with_different_works_in_parallel,
     neighbor_function: callable = insert_move,
     stop_time_condition: int = 10000,
 ):
@@ -262,7 +262,10 @@ class Solution:
         self.inventory = Inventory(work_types, customer_deadlines)
         self.status = "not evaluated"
 
-    def constructive_solution(self, create_job_function: callable):
+    def constructive_solution(
+        self,
+        create_job_function: callable = create_job_with_different_works_in_parallel,
+    ):
         works_to_do = self.inventory.check_inventory()
         while len(works_to_do) > 0:
             job = create_job_function(works_to_do, self.schedule)
@@ -320,10 +323,10 @@ class Solution:
     def jobs_used(self):
         return sum([len(s.list_jobs) for s in self.schedule])
 
-    def remaining_time(self):
+    def total_remaining_time(self):
         return sum([s.remaining_time() for s in self.schedule])
 
-    def max_remaining_time(self):
+    def max_machine_remaining_time(self):
         return max([s.remaining_time() for s in self.schedule])
 
     def is_better_solution_than(self, other_solution: "Solution"):
@@ -331,11 +334,12 @@ class Solution:
             self.jobs_used() < other_solution.jobs_used()
             or (
                 self.jobs_used() == other_solution.jobs_used()
-                and self.remaining_time() < other_solution.remaining_time()
+                and self.total_remaining_time() < other_solution.total_remaining_time()
             )
             or (
                 self.jobs_used() == other_solution.jobs_used()
-                and self.remaining_time() == other_solution.remaining_time()
-                and self.max_remaining_time() > other_solution.max_remaining_time()
+                and self.total_remaining_time() == other_solution.total_remaining_time()
+                and self.max_machine_remaining_time()
+                > other_solution.max_machine_remaining_time()
             )
         )
