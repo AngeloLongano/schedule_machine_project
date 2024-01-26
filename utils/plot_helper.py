@@ -63,6 +63,7 @@ def draw_gantt_chart(
 
     fig, ax = plt.subplots(layout="constrained")
     ax.set_title(name)
+    ax.set_ylabel("Machine[Pallet]")
 
     index_slot = 0
     count_job = 0
